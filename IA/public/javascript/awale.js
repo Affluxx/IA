@@ -10,7 +10,11 @@ function InitGame(){
         $(this).text($(this).data('pawn-number'));
     });
 }
+function Coucou() {
+	alert ("Hello!");
+}
 
 $(function(){
     $("[awale-init]")[0].onclick=InitGame;
+    $("[data-square-number=0]").click(Coucou);
 });
