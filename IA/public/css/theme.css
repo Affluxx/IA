@@ -3,3 +3,39 @@ body{
     background-repeat: none;
     background-size: 100%;
 }
+
+#awale{
+    color : #FFF;
+}
+
+.square {
+    line-height:75px;
+    vertical-align: middle;
+    height: 75px;
+    border-radius: 30px;
+    background-color: #333;
+}
+
+#awale-board .row{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.stock{
+    line-height:75px;
+    vertical-align: middle;
+    border-radius: 30px;
+    height: 75px;
+    background-color: #333;
+}
+#awale-board .row .columns{
+    padding-left: 2px;
+    padding-right: 2px;
+}
+.row-no-margin{
+    margin-right:0px !important;
+    margin-left:0px !important;
+}
+.new-game{    
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
