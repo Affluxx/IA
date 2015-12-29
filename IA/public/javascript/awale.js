@@ -6,17 +6,19 @@
 */
 function InitGame(){
     $('.square').each(function(){
-        $(this).attr('data-pawn-number',4);
+        $(this).attr('data-square-number',4);
         refresh($(this));
     });
     $('.stock').each(function(){
-        $(this).attr('data-pawn-number',0);
+        $(this).attr('data-stock-number',0);
         refresh($(this));
     });
 }
-function Coucou() {
-	alert ("Hello!");
+/*
+function Coucou(x) {
+	alert ("Hello! : " + x);
 }
+*/
 
 //actualise une case selon son data-pawn-number
 function refresh(x){
@@ -25,5 +27,5 @@ function refresh(x){
 
 $(function(){
     $("[awale-init]")[0].onclick=InitGame;
-    $("[data-square-number=0]").click(Coucou);
+    //$("[data-square-number]").click(Coucou($(this).data('square-number')));
 });
