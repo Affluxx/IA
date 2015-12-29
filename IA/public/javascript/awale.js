@@ -6,11 +6,11 @@
 */
 function InitGame(){
     $('.square').each(function(){
-        $(this).attr('data-square-number',4);
+        $(this).attr('data-pawn-number',4);
         refresh($(this));
     });
     $('.stock').each(function(){
-        $(this).attr('data-stock-number',0);
+        $(this).attr('data-pawn-number',0);
         refresh($(this));
     });
 }
