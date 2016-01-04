@@ -15,11 +15,11 @@ function InitGame(){
     });
     TopPlayerTurn = false;
 }
-/*
-function Coucou(x) {
-    alert ("Hello! : " + x);
+// Fonction qui affiche les règles du jeu.
+function rules() {
+    alert("Règles du jeu Awale : Ici a ajouter.");
 }
-*/
+// Variable utile pour le jeu.
 var TopPlayerTurn = false;
 var win = false;
 //actualise une case selon son data-pawn-number
@@ -47,6 +47,7 @@ function isWin(){
         }
     });
 }
+
 //joue la case numero position
 function play(position){
     if(((position <= 5 && TopPlayerTurn) || (position > 5 && !TopPlayerTurn)) && !win){
@@ -102,18 +103,11 @@ function play(position){
 }
 //Fonction qui affiche la dernière case atteinte par la case choisit.
 function watch(position) {
-    if(((position <= 5 && TopPlayerTurn) || (position > 5 && !TopPlayerTurn)) && !win) {
-        //recuperation des données de la case regarder
-        var watchedDiv = $('[data-position=' + position + ']');
-        var pawnNumber = clickedDiv.data('pawn-number');
-        watchedDiv.data('pawn-number', 0);
-
-    }
-
 }
 
 $(function(){
     $("[awale-init]")[0].onclick=InitGame;
+    $("[awale-rules]")[0].onclick=rules;
 });
 
 
