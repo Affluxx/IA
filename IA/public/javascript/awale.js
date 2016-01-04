@@ -1,5 +1,3 @@
-//alert($("h1").text());
-//$("#awale-board").createElement('div'));
 /*
     Initialise la partie.
     Stock a 0 et cases à 4
@@ -36,15 +34,15 @@ function refreshAll(){
     });
 }
 
-
+// Verifie la condition de victoire : Plus de 25 pions
 function isWin(){
     $('.stock').each(function(){
         if ($(this).data('pawn-number') > 24){
             win = true;
             if (TopPlayerTurn){
-                alert("J1 a gagné");
+                alert("Joueur 1 a gagné");
             } else {
-                alert("J2 a gagné");
+                alert("Joueur 2 a gagné");
             }
         }
     });
@@ -58,13 +56,22 @@ function play(position){
         var pawnNumber = clickedDiv.data('pawn-number');
         clickedDiv.data('pawn-number', 0);
         //distribution des jetons
-        while(pawnNumber > 0){
+        var oldPosition = position
+        while(pawnNumber > 0) {
             position = (position + 1) % 12;
+            // Dans le cas où on reviens a la position de départ
+            if (oldPosition == position) {
+                // Ne fait rien
+            } else {
             var div = $('[data-position=' + position + ']');
             var divPawnNumber = div.data('pawn-number');
             div.data('pawn-number', divPawnNumber + 1);
             pawnNumber--;
+            }
         }
+        
+        //var newPosition = position;
+        
 
         //mise a jour du pion
         var divPawnNumber = div.data('pawn-number');
@@ -92,6 +99,17 @@ function play(position){
         isWin();
         TopPlayerTurn = !TopPlayerTurn;
     }
+}
+//Fonction qui affiche la dernière case atteinte par la case choisit.
+function watch(position) {
+    if(((position <= 5 && TopPlayerTurn) || (position > 5 && !TopPlayerTurn)) && !win) {
+        //recuperation des données de la case regarder
+        var watchedDiv = $('[data-position=' + position + ']');
+        var pawnNumber = clickedDiv.data('pawn-number');
+        watchedDiv.data('pawn-number', 0);
+
+    }
+
 }
 
 $(function(){
