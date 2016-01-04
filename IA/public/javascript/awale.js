@@ -17,7 +17,8 @@ function InitGame(){
 }
 // Fonction qui affiche les règles du jeu.
 function rules() {
-    alert("Règles du jeu Awale : Ici a ajouter.");
+    //alert("Règles du jeu Awale : Ici a ajouter.");
+    window.location.href = "rules.html"
 }
 // Variable utile pour le jeu.
 var TopPlayerTurn = false;
