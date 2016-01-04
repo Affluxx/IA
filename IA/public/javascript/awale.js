@@ -56,41 +56,43 @@ function play(position){
         //recuperation des données de la case jouée
         var clickedDiv = $('[data-position=' + position + ']');
         var pawnNumber = clickedDiv.data('pawn-number');
-        clickedDiv.data('pawn-number', 0);
-        //distribution des jetons
-        while(pawnNumber > 0){
-            position = (position + 1) % 12;
-            var div = $('[data-position=' + position + ']');
-            var divPawnNumber = div.data('pawn-number');
-            div.data('pawn-number', divPawnNumber + 1);
-            pawnNumber--;
-        }
-
-        //mise a jour du pion
-        var divPawnNumber = div.data('pawn-number');
-
-        //ramassage des pions si bon coté && 3 ou 2 pions
-        while(((position > 5 && TopPlayerTurn) || (position <= 5 && !TopPlayerTurn)) && (divPawnNumber == 2 || divPawnNumber == 3)){
-            if (TopPlayerTurn){
-                var stock = $('#stock-top');
-            } else {
-                var stock = $('#stock-bottom');
+        if (pawnNumber > 0) {
+            clickedDiv.data('pawn-number', 0);
+            //distribution des jetons
+            while(pawnNumber > 0){
+                position = (position + 1) % 12;
+                var div = $('[data-position=' + position + ']');
+                var divPawnNumber = div.data('pawn-number');
+                div.data('pawn-number', divPawnNumber + 1);
+                pawnNumber--;
             }
 
-            var stockPawnNumber = stock.data('pawn-number');
-
-            stock.data('pawn-number', stockPawnNumber + divPawnNumber);
-            div.data('pawn-number', 0);
-
-            //mise a jour des variables
-            position = (position - 1);
-            var div = $('[data-position=' + position + ']');
+            //mise a jour du pion
             var divPawnNumber = div.data('pawn-number');
-            
+
+            //ramassage des pions si bon coté && 3 ou 2 pions
+            while(((position > 5 && TopPlayerTurn) || (position <= 5 && !TopPlayerTurn)) && (divPawnNumber == 2 || divPawnNumber == 3)){
+                if (TopPlayerTurn){
+                    var stock = $('#stock-top');
+                } else {
+                    var stock = $('#stock-bottom');
+                }
+
+                var stockPawnNumber = stock.data('pawn-number');
+
+                stock.data('pawn-number', stockPawnNumber + divPawnNumber);
+                div.data('pawn-number', 0);
+
+                //mise a jour des variables
+                position = (position - 1);
+                var div = $('[data-position=' + position + ']');
+                var divPawnNumber = div.data('pawn-number');
+                
+            }
+            refreshAll();
+            isWin();
+            TopPlayerTurn = !TopPlayerTurn;
         }
-        refreshAll();
-        isWin();
-        TopPlayerTurn = !TopPlayerTurn;
     }
 }
 
