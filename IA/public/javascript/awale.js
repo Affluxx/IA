@@ -1,5 +1,3 @@
-//alert($("h1").text());
-//$("#awale-board").createElement('div'));
 /*
     Initialise la partie.
     Stock a 0 et cases à 4
@@ -17,11 +15,12 @@ function InitGame(){
     });
     TopPlayerTurn = false;
 }
-/*
-function Coucou(x) {
-    alert ("Hello! : " + x);
+// Fonction qui affiche les règles du jeu.
+function rules() {
+    //alert("Règles du jeu Awale : Ici a ajouter.");
+    window.location.href = "rules.html"
 }
-*/
+// Variable utile pour le jeu.
 var TopPlayerTurn = false;
 var win = false;
 //actualise une case selon son data-pawn-number
@@ -36,19 +35,20 @@ function refreshAll(){
     });
 }
 
-
+// Verifie la condition de victoire : Plus de 25 pions
 function isWin(){
     $('.stock').each(function(){
         if ($(this).data('pawn-number') > 24){
             win = true;
             if (TopPlayerTurn){
-                alert("J1 a gagné");
+                alert("Joueur 1 a gagné");
             } else {
-                alert("J2 a gagné");
+                alert("Joueur 2 a gagné");
             }
         }
     });
 }
+
 //joue la case numero position
 function play(position){
     if(((position <= 5 && TopPlayerTurn) || (position > 5 && !TopPlayerTurn)) && !win){
@@ -59,17 +59,19 @@ function play(position){
         if (pawnNumber > 0) {
             clickedDiv.data('pawn-number', 0);
             //distribution des jetons
-            while(pawnNumber > 0){
+            var oldPosition = position
+            while(pawnNumber > 0) {
                 position = (position + 1) % 12;
-                var div = $('[data-position=' + position + ']');
-                var divPawnNumber = div.data('pawn-number');
-                div.data('pawn-number', divPawnNumber + 1);
-                pawnNumber--;
+                // On ne repose pas de pion a l'ancienne position donc on skip
+                if (oldPosition != position) {
+                    var div = $('[data-position=' + position + ']');
+                    var divPawnNumber = div.data('pawn-number');
+                    div.data('pawn-number', divPawnNumber + 1);
+                    pawnNumber--;
+                }
             }
-
             //mise a jour du pion
             var divPawnNumber = div.data('pawn-number');
-
             //ramassage des pions si bon coté && 3 ou 2 pions
             while(((position > 5 && TopPlayerTurn) || (position <= 5 && !TopPlayerTurn)) && (divPawnNumber == 2 || divPawnNumber == 3)){
                 if (TopPlayerTurn){
@@ -95,9 +97,13 @@ function play(position){
         }
     }
 }
+//Fonction qui affiche la dernière case atteinte par la case choisit.
+function watch(position) {
+}
 
 $(function(){
     $("[awale-init]")[0].onclick=InitGame;
+    $("[awale-rules]")[0].onclick=rules;
 });
 
 
