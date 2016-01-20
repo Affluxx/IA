@@ -5,7 +5,7 @@ var gameboard = new Gameboard();
     Stock a 0 et cases à 4
 */
 function InitGame(){
-    console.log("init");
+    //console.log("init");
     gameboard.Init();    
     refreshAll();
 }
@@ -16,15 +16,15 @@ function rules() {
 }
 //actualise une case selon son data-pawn-number
 function refreshSquare(x){
-    console.log("refresh : " + x.data('position'));
-    console.log(x);
-    console.log(gameboard);
+    //console.log("refresh : " + x.data('position'));
+    //console.log(x);
+    //console.log(gameboard);
     x.text(gameboard.Square[x.data('position')]);
 }
 
 //actualise toutes les cases ayant un data-pawn-number
 function refreshAll(){
-    console.log("refreshAll");
+    //console.log("refreshAll");
     $('.square').each(function(){
         refreshSquare($(this));
     });
