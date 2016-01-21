@@ -17,8 +17,8 @@ var Gameboard = function(){
 	this.Init = function(){
 		this.TopStock = 0;
 		this.BottomStock = 0;
-		//this.Square = [4,4,4,4,4,4,4,4,4,4,4,4];
-		this.Square = [1,1,1,1,1,1,1,1,1,1,1,1];
+		this.Square = [4,4,4,4,4,4,4,4,4,4,4,4];
+		//this.Square = [1,1,1,1,1,1,1,1,1,1,1,1];
 	    this.TopPlayerTurn = false;
 	}
 	/*
