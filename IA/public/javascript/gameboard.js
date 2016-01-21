@@ -125,6 +125,6 @@ var Gameboard = function(){
     	}
 	}
 	this.IsPlayable = function(position) {
-		(!this.IsPlayStarve && this.Square[position] != 0); 
+		return (((position <= 5 && this.TopPlayerTurn) || (position > 5 && !this.TopPlayerTurn)) && !this.IsWin()) && (!this.IsPlayStarve(position) && this.Square[position] != 0); 
 	}
 }
