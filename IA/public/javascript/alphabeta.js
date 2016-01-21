@@ -7,7 +7,7 @@ var AlphaBeta = function() {
 	/*
 	Fonction qui calcule la valeur d'heuristique celon la profondeur choisis
 	*/
-	this.CalculHeuristique = function(profondeur, gameboard) {
+	this.CalculHeuristique = function(gameboard) {
 		
 	}
 }
