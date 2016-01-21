@@ -1,4 +1,5 @@
 var gameboard = new Gameboard();
+var alphabeta = new AlphaBeta();
 
 /*
     Initialise la partie.
