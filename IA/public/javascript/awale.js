@@ -26,7 +26,6 @@ function play(position){
     checkWin();
 }
 function InitGame(){
-    //console.log("init");
     gameboard.Init();    
     while (!gameboard.IsWin()){
 
@@ -34,12 +33,10 @@ function InitGame(){
         alphabeta.Compile(alphabeta.noeud,-100,100);
         if(gameboard.MinTurn){
             var p = alphabeta.GetBestPlay();
-            console.log("Min played : " + p)
             play(p);
 
         } else {
             var p = alphabeta.RandomPlay();
-            console.log("Max played : " + p)
             play(p);
         }
         refreshAll();
@@ -52,24 +49,16 @@ function rules() {
 }
 //actualise une case selon son data-pawn-number
 function refreshSquare(x){
-    //console.log("refresh : " + x.data('position'));
-    //console.log(x);
-    //console.log(gameboard);
     x.text(gameboard.Square[x.data('position')]);
 }
 
 //actualise toutes les cases ayant un data-pawn-number
 function refreshAll(){
-    //console.log("refreshAll");
     $('.square').each(function(){
         refreshSquare($(this));
     });
     $('#stock-bottom').text(gameboard.BottomStock);
     $('#stock-top').text(gameboard.TopStock);
-}
-
-//Fonction qui affiche la dernière case atteinte par la case choisit.
-function watch(position) {
 }
 
 $(function(){
@@ -79,15 +68,3 @@ $(function(){
     $("[awale-init]")[0].onclick=InitGame;
     $("[awale-rules]")[0].onclick=rules;
 });
-
-
-
-/*
-a utiliser plus tard
-something.onmouseover = function() {
-    this.style.backgroundColor = 'red';
-};
-something.onmouseout = function() {
-    this.style.backgroundColor = '';
-};
-*/

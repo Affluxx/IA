@@ -18,11 +18,11 @@ var AlphaBeta = function() {
 		this.gameboard = gameboard.Clone();
 		this.noeud = new Noeud();
 		this.noeud.gameboard = this.gameboard;
-		this.CreerArbre(this.gameboard,profondeur,this.noeud)
+		this.CreerArbre(this.gameboard,profondeur,this.noeud);
 	}
 	// Fonction qui creer l'arbre lié a l IA
 	this.CreerArbre = function(gameboard,profondeur, noeud) {
-		if (profondeur == 0) {
+		if (profondeur == 0 || gameboard.IsWin()) {
 			noeud.poids = this.CalculHeuristique(gameboard);
 		} else {
 			// On boucle sur tout les coups possibles
@@ -64,85 +64,33 @@ var AlphaBeta = function() {
 		var random = Math.floor((Math.random()*nbsucc));
 		return bestMoves[random];
 	}
-/* BIZARRE
 	this.Compile = function(noeud, a, b){
 		var val;
 		if(noeud.successeurs.length == 0){
-			console.log(noeud.poids);
 			return noeud.poids;
 		} else {
-			console.log("---------");
 			if(!noeud.gameboard.MinTurn){
-				console.log("Max turn");
-
-				var i = 0;
-				while(a < b && i < noeud.successeurs.length){
-					val = Math.max(a,this.Compile(noeud.successeurs[i],a,b));					
-					noeud.poids = val;
-					i++;
-					if (a >= b){
-						console.log("false");
-					} else {
-						console.log("true")
-					}
-				}
-				a = val;
-			} else {
-				console.log("Min/IA turn");
-				var i = 0;
-				while(a < b && i < noeud.successeurs.length){
-					val = Math.max(a,this.Compile(noeud.successeurs[i],a,b));					
-					noeud.poids = val;
-					i++;
-					if (a >= b){
-						console.log("a >= b");
-					}
-				}
-				b = val;
-			}
-		}
-		return val;
-	}
-	*/
-	this.Compile = function(noeud, a, b){
-		var val;
-		if(noeud.successeurs.length == 0){
-			//console.log(noeud.poids);
-			return noeud.poids;
-		} else {
-			//console.log("---------");
-			if(!noeud.gameboard.MinTurn){
-				//console.log("Max turn");
-
 				var minimax = a;
 				for (var succ of noeud.successeurs){
 					val = this.Compile(succ,minimax,b);					
 					if(minimax < val){
 						minimax = val;
 					}
-					//console.log("Max turn : a=" + a + " b=" + b + " val=" + val + " minimax=" + minimax);
-
 					if (minimax >= b){
-						//console.log("stop");
 						noeud.poids = minimax;
 						return minimax;
 					}
 				}
 				noeud.poids = minimax;
 				return minimax;
-			} else {
-				//console.log("Min/IA turn");
-				
+			} else {			
 				var minimax = b;
 				for (var succ of noeud.successeurs){
 					val = this.Compile(succ,a,minimax);					
 					if(minimax > val){
 						minimax = val;
 					}
-
-					//console.log("Min turn : a=" + a + " b=" + b + " val=" + val + " minimax=" + minimax);
 					if (minimax <= b){
-						//console.log("stop");
 						noeud.poids = minimax;
 						return minimax;
 					}

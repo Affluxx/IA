@@ -30,7 +30,6 @@ var Gameboard = function(){
 
 	this.play = function(position){
 		if (this.IsPlayStarve(position)) {
-			//console.log("Is Playable");
 			alert("Vous n'avez pas le droit d'affamer l'adversaire");
 		} else {
 		    if(((position <= 5 && this.MinTurn) || (position > 5 && !this.MinTurn))){
@@ -61,13 +60,9 @@ var Gameboard = function(){
 		                //mise a jour des variables
 		                position = (position - 1);
 		            }
-		           // console.log(a);
 		            this.MinTurn = !this.MinTurn;
-		            //this.a++;
-		            //console.log(a);
 		        }	        
 		    }
-		    /*
 		    if(this.Starve()) {
 		    	for(var i = 0; i < 6; i++) {
 		    		this.TopStock += this.Square[i];
@@ -78,14 +73,13 @@ var Gameboard = function(){
 		    		this.Square[j] = 0;
 		    	}
 		    }
-		    */
 		}
 	}
 	/*
 	Fonction qui verifie qu'on as le droit de jouer a position sans affamer l'adversaire
 	*/
 	this.IsPlayStarve = function(position) {
-		//console.log
+		//
 		if(((position <= 5 && this.MinTurn) || (position > 5 && !this.MinTurn))){
 			var nextGameboard = this.Clone();
 	        //recuperation des données de la case jouée
@@ -115,9 +109,7 @@ var Gameboard = function(){
 	                position = (position - 1);
 	            }
 	            nextGameboard.MinTurn = !nextGameboard.MinTurn;
-	            //console.log(a);
 	        }
-	        //console.log(nextGameboard);
 	        if(nextGameboard.MinTurn) {
 	        	for (var i = 0; i < 6; i++) {
 	        		if (nextGameboard.Square[i] != 0) {
@@ -141,7 +133,7 @@ var Gameboard = function(){
 	this.Starve = function() {
 		var nextGameboard = this.Clone();
 		for (var i = 0; i < 12; i++) {
-			if(!nextGameboard.IsPlayable(i)) {
+			if(nextGameboard.IsPlayable(i)) {
 				return false;
 			}
 		}
