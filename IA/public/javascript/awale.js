@@ -5,10 +5,45 @@ var alphabeta = new AlphaBeta();
     Initialise la partie.
     Stock a 0 et cases à 4
 */
+
+
+// Verifie la condition de victoire : Plus de 25 pions
+function checkWin(){
+    if(gameboard.IsWin()){
+        if (gameboard.BottomStock > 24){
+            alert("Random a gagné");
+        }
+        if (gameboard.TopStock > 24){
+            alert("alphabeta a gagné");
+        }
+    }
+}
+
+//joue la case numero position
+function play(position){
+    gameboard.play(position);
+    refreshAll();
+    checkWin();
+}
 function InitGame(){
     //console.log("init");
     gameboard.Init();    
-    refreshAll();
+    while (!gameboard.IsWin()){
+
+        alphabeta.Init(gameboard,4);
+        alphabeta.Compile(alphabeta.noeud,-100,100);
+        if(gameboard.MinTurn){
+            var p = alphabeta.GetBestPlay();
+            console.log("Min played : " + p)
+            play(p);
+
+        } else {
+            var p = alphabeta.RandomPlay();
+            console.log("Max played : " + p)
+            play(p);
+        }
+        refreshAll();
+    }
 }
 // Fonction qui affiche les règles du jeu.
 function rules() {
@@ -33,24 +68,6 @@ function refreshAll(){
     $('#stock-top').text(gameboard.TopStock);
 }
 
-// Verifie la condition de victoire : Plus de 25 pions
-function checkWin(){
-    if(gameboard.IsWin()){
-        if (gameboard.BottomStock > 24){
-            alert("Joueur 2 a gagné");
-        }
-        if (gameboard.TopStock > 24){
-            alert("Joueur 1 a gagné");
-        }
-    }
-}
-
-//joue la case numero position
-function play(position){
-    gameboard.play(position);
-    refreshAll();
-    checkWin();
-}
 //Fonction qui affiche la dernière case atteinte par la case choisit.
 function watch(position) {
 }
